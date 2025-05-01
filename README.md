@@ -20,39 +20,92 @@ Redis: Used for caching and session management.
 Docker: Containerization tool for consistent development and deployment environments.
 CI/CD Pipelines: Automated pipelines for testing and deploying code changes.
 
-## Database Design
+### 🗂️ Database Design
 
-Users
+The database is designed to support the core features of an Airbnb-style booking platform. It includes essential entities like **Users**, **Properties**, **Bookings**, **Reviews**, and **Payments**, and models how they relate to one another.
 
-GET /users/ - List all users
-POST /users/ - Create a new user
-GET /users/{user_id}/ - Retrieve a specific user
-PUT /users/{user_id}/ - Update a specific user
-DELETE /users/{user_id}/ - Delete a specific user
-Properties
+### Users
 
-GET /properties/ - List all properties
-POST /properties/ - Create a new property
-GET /properties/{property_id}/ - Retrieve a specific property
-PUT /properties/{property_id}/ - Update a specific property
-DELETE /properties/{property_id}/ - Delete a specific property
-Bookings
+Represents both guests and hosts.
 
-GET /bookings/ - List all bookings
-POST /bookings/ - Create a new booking
-GET /bookings/{booking_id}/ - Retrieve a specific booking
-PUT /bookings/{booking_id}/ - Update a specific booking
-DELETE /bookings/{booking_id}/ - Delete a specific booking
-Payments
+- `id`: Unique identifier
+- `name`: Full name of the user
+- `email`: Unique email address
+- `role`: Either 'guest' or 'host'
+- `created_at`: Date the account was created
 
-POST /payments/ - Process a payment
-Reviews
+**Relationships**:
 
-GET /reviews/ - List all reviews
-POST /reviews/ - Create a new review
-GET /reviews/{review_id}/ - Retrieve a specific review
-PUT /reviews/{review_id}/ - Update a specific review
-DELETE /reviews/{review_id}/ - Delete a specific review
+- A user can list **multiple properties** (if host)
+- A user can make **multiple bookings** (if guest)
+- A user can write **multiple reviews**
+
+---
+
+### Properties
+
+Represents listings that can be booked.
+
+- `id`: Unique identifier
+- `title`: Name of the property
+- `description`: Property details
+- `price_per_night`: Cost per night
+- `host_id`: Foreign key to the user who owns the property
+
+**Relationships**:
+
+- A property belongs to **one host (user)**
+- A property can have **multiple bookings**
+- A property can have **multiple reviews**
+
+---
+
+### Bookings
+
+Represents a reservation made by a user.
+
+- `id`: Unique identifier
+- `guest_id`: Foreign key to the user making the booking
+- `property_id`: Foreign key to the booked property
+- `check_in`: Start date of booking
+- `check_out`: End date of booking
+
+**Relationships**:
+
+- A booking is made by **one guest (user)**
+- A booking is for **one property**
+- A booking has **one payment**
+
+### Reviews
+
+Represents feedback given by guests after a stay.
+
+- `id`: Unique identifier
+- `user_id`: Foreign key to the user who wrote the review
+- `property_id`: Foreign key to the property being reviewed
+- `rating`: Numeric score
+- `comment`: Written feedback
+
+**Relationships**:
+
+- A review is written by **one user**
+- A review is for **one property**
+
+---
+
+### Payments
+
+Represents payment details for a booking.
+
+- `id`: Unique identifier
+- `booking_id`: Foreign key to the associated booking
+- `amount`: Total paid
+- `payment_method`: e.g., card, PayPal
+- `status`: Paid, pending, failed
+
+**Relationships**:
+
+- A payment is linked to **one booking**
 
 ## Feature Breakdown
 
@@ -78,3 +131,6 @@ Features: Post and manage reviews for properties.
 7. Database Optimizations
 Indexing: Implement indexes for fast retrieval of frequently accessed data.
 Caching: Use caching strategies to reduce database load and improve performance.
+
+## API Security
+
