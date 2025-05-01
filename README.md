@@ -76,6 +76,8 @@ Represents a reservation made by a user.
 - A booking is for **one property**
 - A booking has **one payment**
 
+---
+
 ### Reviews
 
 Represents feedback given by guests after a stay.
@@ -134,3 +136,37 @@ Caching: Use caching strategies to reduce database load and improve performance.
 
 ## API Security
 
+Security is a critical component of this project to protect users, their data, and financial transactions. Below are the key API security measures that will be implemented:
+
+---
+
+### Authentication
+
+Ensures that only registered users can access protected endpoints using secure login credentials or tokens (e.g., JWT).
+
+**Why it's important**:
+
+- Prevents unauthorized access to user accounts.
+- Protects sensitive data like emails, passwords, and booking history.
+
+---
+
+### Authorization
+
+Verifies that authenticated users can only perform actions they are allowed to (e.g., a user can’t delete someone else’s property listing).
+
+**Why it's important**:
+
+- Ensures that users cannot access or modify resources that don’t belong to them.
+- Helps enforce user roles (guest vs host vs admin).
+
+---
+
+### Rate Limiting
+
+Limits the number of requests a user or IP can make in a given time frame.
+
+**Why it's important**:
+
+- Protects the server from abuse and DDoS attacks.
+- Prevents brute-force attempts on login and payment routes.
