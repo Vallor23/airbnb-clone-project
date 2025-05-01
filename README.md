@@ -179,7 +179,7 @@ Limits the number of requests a user or IP can make in a given time frame.
 
 ## CI/CD Pipeline
 
-CI/CD (Continuous Integration and Continuous Deployment) is a crucial part of modern software development that helps automate testing, building, and deploying code. It ensures faster development cycles, reduces human error, and increases the reliability of application updates.
+CI/CD (Continuous Integration and Continuous Deployment) is a crucial part of modern software development that helps automate testing, building, and deploying code. It ensures faster development cycles, reduces human error, and increases the reliability of application updates.Implementing CI/CD helps maintain a high-quality, scalable, and maintainable code
 
 ---
 
@@ -208,5 +208,3 @@ CI/CD (Continuous Integration and Continuous Deployment) is a crucial part of mo
 - **Sentry / LogRocket:** For error tracking and monitoring.
 
 ---
-
-Implementing CI/CD helps maintain a high-quality, scalable, and maintainable code
